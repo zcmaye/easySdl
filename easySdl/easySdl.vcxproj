@@ -72,8 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>E:\Tool\SDL2-2.0.16\include;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Tool\SDL2-2.0.16\SDL_image_lib\x86;E:\Tool\SDL2-2.0.16\SDL_ttf_lib\x86;E:\Tool\SDL2-2.0.16\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>.\SDL2-2.0.16\include;$(IncludePath)</IncludePath>
+    <LibraryPath>.\SDL2-2.0.16\SDL_image_lib\x86;.\SDL2-2.0.16\SDL_ttf_lib\x86;.\SDL2-2.0.16\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>

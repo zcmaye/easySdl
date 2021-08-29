@@ -6,9 +6,15 @@ static int x = 0,y;
 void keyDeal(int key);
 int main(int argc, char* argv[])
 {
+    
     initgraph(640, 480, SDL_WINDOW_SHOWN);
+    setWindowTitle("我的Sdl窗口");
     setbkcolor(White);
-    loadImage(&snow, "千仞雪.jpg", 0, 0);
+    loadimage(&snow, "千仞雪.jpg", 0, 0);
+    
+    SDL_CreateWindow("subWindow", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 460, 300, SDL_WINDOW_SHOWN);
+    SDL_CreateWindowFrom()
+    
 
     ExMessage msg = {0};
     while (true)
@@ -22,9 +28,34 @@ int main(int argc, char* argv[])
                 break;
             }
         }            
-        putImage(50, 50, &snow);  
-        outtextxy(50, 50, "hello 你好",argb(255,Red));     
-        fillRect(x, y, 100, 100, argb(20, Green));
+        putimage(50, 50, &snow);  
+        
+        //fillRect(x, y, 100, 100, argb(200, Green));
+       // line(50, 50, 250, 250,Red);
+        //outtextxy(50, 50, "hello 你好");
+        //outtextxy(100, 250, "我是顽石老师");
+       
+        //settextstyle(26,0,"font/simhei.ttf");
+        //settextcolor(argb(255, Red));
+
+        for (size_t i = 0; i < 100; i++)
+        {
+            putpixel(30 + i, 30, Red);
+        }
+      
+        //SDL_Log("color %x\n",getpixel(100, 100));
+
+        line(50, 50, 100, 100);
+        rectangle(0, 0, 20, 20);
+        fillrectangle(30, 0, 20, 20);
+        setfillcolor(Red);
+        solidrectangle(60, 0, 20, 20);
+        
+        circle(110,20, 20);
+        solidcircle(150, 20, 20);
+        fillcircle(190, 20, 20);
+        //ellipse(300, 0, 300 + 60, 30);
+        ellipse(300, 0, 300 + 10, 5);
 
         keyDeal(10);
         delay();
