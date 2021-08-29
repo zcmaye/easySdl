@@ -225,6 +225,7 @@ enum VKCode
 #ifdef __cplusplus
 }
 #endif // __cplusplus
+void drawEllipse(int x0, int y0, int a, int b);
 #endif
 
 

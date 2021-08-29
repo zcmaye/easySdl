@@ -12,9 +12,7 @@ int main(int argc, char* argv[])
     setbkcolor(White);
     loadimage(&snow, "千仞雪.jpg", 0, 0);
     
-    SDL_CreateWindow("subWindow", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 460, 300, SDL_WINDOW_SHOWN);
-    SDL_CreateWindowFrom()
-    
+    SDL_CreateWindow("subWindow", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 460, 300, SDL_WINDOW_SHOWN);  
 
     ExMessage msg = {0};
     while (true)
@@ -55,7 +53,10 @@ int main(int argc, char* argv[])
         solidcircle(150, 20, 20);
         fillcircle(190, 20, 20);
         //ellipse(300, 0, 300 + 60, 30);
-        ellipse(300, 0, 300 + 10, 5);
+        //ellipse(300, 0, 300 + 10, 5);
+
+        setlinecolor(Green);
+        drawEllipse(250, 250, 60, 30);
 
         keyDeal(10);
         delay();
@@ -122,3 +123,6 @@ void keyDeal(int speed)
                 break;
             }
 */
+
+
+

@@ -6,6 +6,8 @@
 
 [SDL视频教程](https://www.bilibili.com/video/BV1rK411V7eu?p=9)
 
+[B站 SDL游戏](https://space.bilibili.com/283850413/video)
+
 ```c
 // Headers
 #include "SDL.h"
