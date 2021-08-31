@@ -228,7 +228,7 @@ void line(int x1, int y1, int x2, int y2)
 void rectangle(int left, int top, int right, int bottom)
 {
 	SDL_SetRenderDrawColor(window->renderer, toRgbaColor(window->lineColor));
-	SDL_RenderDrawRect(window->renderer, &(SDL_Rect){left, top, right, bottom});
+	SDL_RenderDrawRect(window->renderer, &(SDL_Rect){left, top, right - left, top - bottom});
 }
 
 void fillrectangle(int left, int top, int right, int bottom)
@@ -240,7 +240,7 @@ void fillrectangle(int left, int top, int right, int bottom)
 void solidrectangle(int left, int top, int right, int bottom)
 {
 	SDL_SetRenderDrawColor(window->renderer, toRgbaColor(window->fillColor));
-	SDL_RenderFillRect(window->renderer, &(SDL_Rect){left, top, right, bottom});
+	SDL_RenderFillRect(window->renderer, &(SDL_Rect){left, top, right-left, top-bottom});
 }
 
 void clearrectangle(int left, int top, int right, int bottom)
@@ -404,8 +404,8 @@ void update()
 bool peekMessage(ExMessage* msg)
 {	
 	update();
-	SDL_SetRenderDrawColor(window->renderer, toRgbaColor(window->bkColor));
-	SDL_RenderClear(window->renderer);
+	SDL_SetRenderDrawColor(window->renderer, toRgbaColor(window->bkColor));	
+	SDL_RenderClear(window->renderer);	
 
 	static SDL_Event ev;
 	SDL_PollEvent(&ev);	

@@ -1,128 +1,198 @@
-﻿#include"easySdl.h"
-
-Image snow;
-//#include<easyx.h>
-static int x = 0,y;
-void keyDeal(int key);
-int main(int argc, char* argv[])
+﻿#include<stdio.h>
+#include"easySdl.h"
+//#include<Windows.h>
+#include<stdlib.h>
+#include<conio.h>
+#include<time.h>
+int map[5][8];//地图数组
+void InsertMap()//创造地图，随机生成1-4的值，存入数组
 {
-    
-    initgraph(640, 480, SDL_WINDOW_SHOWN);
-    setWindowTitle("我的Sdl窗口");
-    setbkcolor(White);
-    loadimage(&snow, "千仞雪.jpg", 0, 0);
-    
-    SDL_CreateWindow("subWindow", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 460, 300, SDL_WINDOW_SHOWN);  
+	srand((unsigned int)time(0));
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
 
-    ExMessage msg = {0};
-    while (true)
-    {
-        start(60);
-        if (peekMessage(&msg))
-        {
-            switch (msg.message)
-            {
-            case M_KEYDOWN:
-                break;
-            }
-        }            
-        putimage(50, 50, &snow);  
-        
-        //fillRect(x, y, 100, 100, argb(200, Green));
-       // line(50, 50, 250, 250,Red);
-        //outtextxy(50, 50, "hello 你好");
-        //outtextxy(100, 250, "我是顽石老师");
-       
-        //settextstyle(26,0,"font/simhei.ttf");
-        //settextcolor(argb(255, Red));
+			map[i][j] = rand() % 4 + 1;
+		}
+	}
+}
+struct _Board//地图下方的板的结构
+{
+	int x;
+	int y;
+	COLORREF Color;
+	int speed;
+}Board;
+struct _Board BlueBoard = { 325,570,LightBlue,10};
+void InsertBlock()//创建砖块
+{
+	int x, y;
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j < 8; j++)
+		{
+			x = 100 * j;
+			y = 25 * i;
+			switch (map[i][j])
+			{
+			case 1:
+				setlinecolor(LightCyan);
+				setfillcolor(Green);
+				fillrectangle(x, y, x + 100, y + 25);
+				break;
+			case 2:
+				setlinecolor(LightCyan);
+				setfillcolor(Red);
+				fillrectangle(x, y, x + 100, y + 25);
+				break;
+			case 3:
+				setlinecolor(LightCyan);
+				setfillcolor(Magenta);
+				fillrectangle(x, y, x + 100, y + 25);
+				break;
+			case 4:
+				setlinecolor(LightCyan);
+				setfillcolor(Blue);
+				fillrectangle(x, y, x + 100, y + 25);
+				break;
+			case 0:
+				break;
+			}
 
-        for (size_t i = 0; i < 100; i++)
-        {
-            putpixel(30 + i, 30, Red);
-        }
-      
-        //SDL_Log("color %x\n",getpixel(100, 100));
+		}
+	}
 
-        line(50, 50, 100, 100);
-        rectangle(0, 0, 20, 20);
-        fillrectangle(30, 0, 20, 20);
-        setfillcolor(Red);
-        solidrectangle(60, 0, 20, 20);
-        
-        circle(110,20, 20);
-        solidcircle(150, 20, 20);
-        fillcircle(190, 20, 20);
-        //ellipse(300, 0, 300 + 60, 30);
-        //ellipse(300, 0, 300 + 10, 5);
+}
+void InitBoard()//绘画地图下方的板
+{
+	setfillcolor(BlueBoard.Color);
+	fillrectangle(BlueBoard.x, BlueBoard.y, BlueBoard.x + 150, BlueBoard.y + 25);
+}
+void MoveBoard()//用户交互，移动板
+{
+	if ((GetAsyncKeyState('A') || GetAsyncKeyState(VK_LEFT))&&BlueBoard.x>=0)
+	{
+		BlueBoard.x -= BlueBoard.speed;
+	}
+	if ((GetAsyncKeyState('D') || GetAsyncKeyState(VK_RIGHT))&&BlueBoard.x+150<=800)
+	{
+		BlueBoard.x += BlueBoard.speed;
+	}
+}
+struct Ball//在地址中发生碰撞的球的结构
+{
+	int x;
+	int y;
+	int r;
+	COLORREF Color;
+	int Dx;
+	int Dy;
+};
+struct Ball CyanBall = { 500,400,10,LightCyan,10,-10};
+void InitBall()//绘制球
+{
+	
+	setfillcolor(CyanBall.Color);
+	solidcircle(CyanBall.x, CyanBall.y, CyanBall.r);
+}
+int Reboundball()
+{
+	if (CyanBall.y + CyanBall.r == BlueBoard.y && (CyanBall.x + CyanBall.r >= BlueBoard.x&&CyanBall.x + CyanBall.r <= BlueBoard.x + 150))
+	{
+		return 1;
+	}
+	else
+		return 0;
 
-        setlinecolor(Green);
-        drawEllipse(250, 250, 60, 30);
+}
+int ClearBlock()
+{
+	int BlockJ = CyanBall.x / 100;
+	int BlockI = (CyanBall.y-CyanBall.r)/25;
+	if ((BlockJ >= 0 && BlockJ < 8) && (BlockI >= 0&&BlockI < 5) && map[BlockI][BlockJ] != 0)
+	{
+		map[BlockI][BlockJ] = 0;
+		return 1;
+	}
+	else
+		return 0;
+}
+void Moveball()
+{
+	CyanBall.x += CyanBall.Dx;
+	CyanBall.y += CyanBall.Dy;
+	if (CyanBall.x + CyanBall.r == 0 || CyanBall.x+CyanBall.r == 800)
+	{
+		CyanBall.Dx = -CyanBall.Dx;
+	}
+	if (Reboundball() || CyanBall.y + CyanBall.r ==0|| ClearBlock())
+	{
+		CyanBall.Dy = -CyanBall.Dy;
+	}
+}
+int GameOver()
+{
+	for (int i=0; i < 5; i++)
+	{
 
-        keyDeal(10);
-        delay();
-    }
-    closegraph();
-    return 0;
+		for (int j = 0; j < 8; j++)
+		{
+			if (map[i][j] != 0)
+			{
+				return 0;
+			}
+		}
+	}
+	return 1;
+}
+int GameDie()
+{
+	if (CyanBall.y-CyanBall.r > 600)
+	{
+		return 1;
+	}
+	else
+		return 0;
 }
 
-void keyDeal(int speed)
-{ 
-    if (GetAsyncKeyState(VK_UP))
-    {
-        y-=speed;
-    }
-    if (GetAsyncKeyState(VK_DOWN))
-    {
-        y+= speed;
-    }
-    if (GetAsyncKeyState(VK_LEFT))
-    {
-        x-= speed;
-    }
-    if (GetAsyncKeyState(VK_RIGHT))
-    {
-        x+= speed;
-    }
+struct Board
+{
+	int x;
+	int y;
+	int w;
+	int h;
+	Uint32 color;
+}board = { 325,570,200,20,LightBlue};
+
+int main(int argc,char* argv[])
+{
+	initgraph(800, 600,SDL_WINDOW_SHOWN);
+	setbkcolor(White);
+	InsertMap();
+	ExMessage msg = {0};
+	while (1)
+	{
+		start(60);
+		if (peekMessage(&msg))
+		{
+		    switch (msg.message)
+		    {
+		    case M_KEYDOWN:
+		        break;
+		    }
+		}
+		//setfillcolor(board.color);
+		//solidrectangle(board.x, board.y, board.x + board.w, board.y + board.h);
+
+		InsertBlock();
+		InitBoard();
+		MoveBoard();
+		InitBall();
+		Moveball();
+
+		delay();
+	}
+closegraph();
+return 0;
 }
-
-/*
-  switch (msg.message)
-            {
-            case M_MOUSEMOVE:
-                SDL_Log("mouse move (%d,%d)\n", msg.x, msg.y);
-                break;
-            case M_LBUTTONDOWN:
-                SDL_Log("mouse leftdown (%d,%d)\n", msg.x, msg.y);
-                break;
-            case M_RBUTTONDOWN:
-                SDL_Log("mouse rightdown (%d,%d)\n", msg.x, msg.y);
-                break;
-            case M_MBUTTONDOWN:
-                SDL_Log("mouse MIDdown (%d,%d)\n", msg.x, msg.y);
-                break;
-            case M_MOUSEWHEEL:
-                SDL_Log("mouse wheel (%d,%d) %d\n", msg.x, msg.y,msg.wheel);
-                break;
-            case M_LBUTTONDBLCLK:
-                SDL_Log("mouse leftdouble (%d,%d)\n", msg.x, msg.y);
-                break;
-            case M_KEYDOWN:
-                VK_SPACE;
-                SDL_Log("vkcode(%d %c)  scancode(%d %c)\n", msg.vkcode, msg.vkcode, msg.scancode, msg.scancode);
-                break;
-            case M_MINIMIZED:
-                SDL_Log("M_MINIMIZED");
-                break;
-            case M_MAXIMIZED:
-                SDL_Log("M_MAXIMIZED");
-                break;
-            case M_MOVED:
-                SDL_Log("M_MOVED");
-                break;
-            default:
-                break;
-            }
-*/
-
-
-
