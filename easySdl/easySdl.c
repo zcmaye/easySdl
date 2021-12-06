@@ -582,7 +582,6 @@ void drawEllipse(int x0, int y0, int a, int b)
 		SDL_RenderDrawPoint(renderer, -x + x0, y + y0);
 		SDL_RenderDrawPoint(renderer, -x + x0, -y + y0);
 
-
 		if (d > 0)
 		{
 			//d += b * b * ((x << 1) + 3) + a * a * ((1 - y) << 1);
