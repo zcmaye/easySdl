@@ -4,7 +4,7 @@ Image snow;
 //#include<easyx.h>
 static int x = 0,y;
 void keyDeal(int key);
-int main(int argc, char* argv[])
+int main11(int argc, char* argv[])
 {
     
     initgraph(640, 480, SDL_WINDOW_SHOWN);

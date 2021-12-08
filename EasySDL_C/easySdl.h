@@ -9,6 +9,10 @@
 #ifdef _WIN32
 #include<Windows.h>
 #include<tchar.h>
+#pragma comment(lib,"x86/SDL2.lib")
+#pragma comment(lib,"x86/SDL2main.lib")
+#pragma comment(lib,"x86/SDL2_image.lib")
+#pragma comment(lib,"x86/SDL2_ttf.lib")
 #endif // _WIN32
 
 // 颜色

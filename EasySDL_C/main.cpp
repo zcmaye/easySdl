@@ -89,7 +89,7 @@ struct Ball//在地址中发生碰撞的球的结构
 	int Dx;
 	int Dy;
 };
-struct Ball CyanBall = { 500,400,10,LightCyan,10,-10};
+struct Ball CyanBall = { 500,400,10,LightCyan,5,-5};
 void InitBall()//绘制球
 {
 	
@@ -173,7 +173,7 @@ int main(int argc,char* argv[])
 	ExMessage msg = {0};
 	while (1)
 	{
-		start(60);
+		start(50);
 		if (peekMessage(&msg))
 		{
 		    switch (msg.message)
