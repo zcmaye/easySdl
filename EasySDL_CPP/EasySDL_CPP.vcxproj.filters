@@ -15,8 +15,31 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>头文件</Filter>
+    <ClCompile Include="GWidget.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GSize.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GWindow.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GWidget.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GConfigure.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GSize.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GWindow.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

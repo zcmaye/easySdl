@@ -85,6 +85,11 @@ void setWindowTitle(const char* title)
 	SDL_SetWindowTitle(window->window, title);
 }
 
+SDL_Renderer* renderer()
+{
+	return window->renderer;
+}
+
 
 
 /*@ Image*/
@@ -547,7 +552,7 @@ void delay()
 	int delayTime = 1000 / SDL_frame.frameCnt - (SDL_GetTicks() - SDL_frame.start);
 	if (delayTime > 0)
 	{
-		//SDL_Log("delayTime:%d\n", delayTime);
+		SDL_Log("delayTime:%d\n", delayTime);
 		SDL_Delay(delayTime);
 	}
 }
@@ -562,64 +567,5 @@ HWND getHWnd()
 		return NULL;
 	}
 	return hq;
-}
-void drawEllipse(int x0, int y0, int a, int b)
-{
-	SDL_Renderer* renderer = window->renderer;
-	SDL_Color* color = &toSdlColor((window->lineColor));
-	SDL_SetRenderDrawColor(renderer, color->r, color->g, color->b, color->a);
-	int x, y, boundry, d;
-	x = 0;
-	y = b;
-	//double d = b * b + a * a * (-b + 0.25);
-	d = 4 * b * b + a * a * (-4 * b + 1);
-	boundry = (int)sqrt(pow(a, 4) / (pow(a, 2) + pow(b, 2)));
-	//椭圆上半部分
-	while (x <= boundry)
-	{
-		SDL_RenderDrawPoint(renderer, x + x0, y + y0);
-		SDL_RenderDrawPoint(renderer, x + x0, -y + y0);
-		SDL_RenderDrawPoint(renderer, -x + x0, y + y0);
-		SDL_RenderDrawPoint(renderer, -x + x0, -y + y0);
-
-		if (d > 0)
-		{
-			//d += b * b * ((x << 1) + 3) + a * a * ((1 - y) << 1);
-			d += (b * b * ((x << 1) + 3) + a * a * ((1 - y) << 1)) << 2;
-			y--;
-		}
-		else
-		{
-			//d += b * b * (x << 1) + 3;
-			d += (b * b * (x << 1) + 3) << 2;
-		}
-		x++;
-	}
-	//d = a * a + b * b * (0.25 - a);
-	d = 4 * a * a + b * b * (1 - 4 * a);
-	x = a;
-	y = 0;
-	//椭圆下半部分
-	while (x >= boundry)
-	{
-		SDL_RenderDrawPoint(renderer, x + x0, y + y0);
-		SDL_RenderDrawPoint(renderer, x + x0, -y + y0);
-		SDL_RenderDrawPoint(renderer, -x + x0, y + y0);
-		SDL_RenderDrawPoint(renderer, -x + x0, -y + y0);
-
-
-		if (d > 0)
-		{
-			//d += a * a * ((y << 1) + 3) + b * b * ((1 - x) << 1);
-			d += (a * a * ((y << 1) + 3) + b * b * ((1 - x) << 1)) << 2;
-			x--;
-		}
-		else
-		{
-			//d += a * a * ((y << 1) + 3);
-			d += (a * a * ((y << 1) + 3)) << 2;
-		}
-		y++;
-	}
 }
 #endif
