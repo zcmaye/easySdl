@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31911.196
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EasySDL_C", "EasySDL_C\EasySDL_C.vcxproj", "{F660DE4D-173C-438F-AD7B-7EDA16710E0C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDL_oop", "SDL_oop\SDL_oop.vcxproj", "{04F52E8C-63CA-4D5B-948E-186D3ADA3768}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{F660DE4D-173C-438F-AD7B-7EDA16710E0C}.Release|x64.Build.0 = Release|x64
 		{F660DE4D-173C-438F-AD7B-7EDA16710E0C}.Release|x86.ActiveCfg = Release|Win32
 		{F660DE4D-173C-438F-AD7B-7EDA16710E0C}.Release|x86.Build.0 = Release|Win32
+		{04F52E8C-63CA-4D5B-948E-186D3ADA3768}.Debug|x64.ActiveCfg = Debug|x64
+		{04F52E8C-63CA-4D5B-948E-186D3ADA3768}.Debug|x64.Build.0 = Debug|x64
+		{04F52E8C-63CA-4D5B-948E-186D3ADA3768}.Debug|x86.ActiveCfg = Debug|Win32
+		{04F52E8C-63CA-4D5B-948E-186D3ADA3768}.Debug|x86.Build.0 = Debug|Win32
+		{04F52E8C-63CA-4D5B-948E-186D3ADA3768}.Release|x64.ActiveCfg = Release|x64
+		{04F52E8C-63CA-4D5B-948E-186D3ADA3768}.Release|x64.Build.0 = Release|x64
+		{04F52E8C-63CA-4D5B-948E-186D3ADA3768}.Release|x86.ActiveCfg = Release|Win32
+		{04F52E8C-63CA-4D5B-948E-186D3ADA3768}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
