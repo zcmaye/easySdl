@@ -204,7 +204,24 @@ int main(int argc, char* argv[])
 	setbkcolor(White);
 
 
+	char*values = SDL_getenv("SDL_PATH");
+	if (values)
+	{
+		char* res = SDL_strchr(values, ';');
+		*res++ = '\0';
 
+		//x64path
+		char x64path[128] = { 0 };
+		SDL_strlcpy(x64path, values, 128);
+		//x86path
+		char x86path[128] = { 0 };
+		SDL_strlcpy(x86path, res, 128);
+		SDL_setenv("SDL_PATH", x64path, 1);
+		SDL_Log("\n\n%s\n%s\n", x64path, x86path);
+	}
+
+	char* value = SDL_getenv("SDL_PATH");
+	SDL_Log("\n%s", value);
 
 	ExMessage msg = { 0 };
 	while (1)

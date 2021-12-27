@@ -1,18 +1,18 @@
-#pragma once
-#include<SDL.h>
+ï»¿#pragma once
+#include<SDL2/SDL.h>
 
 /*
-* Ö±Ïß
-* ¾ØÐÎ
-* µã
+* ç›´çº¿
+* çŸ©å½¢
+* ç‚¹
 */
 /*
-* »æÖÆÍÖÔ²
+* ç»˜åˆ¶æ¤­åœ†
 */
 void drawEllipse(SDL_Renderer* renderer, SDL_Color* color, int left, int top, int right, int bottom);
 
 /*
-* »æÖÆÔ²ÐÎ
+* ç»˜åˆ¶åœ†å½¢
 */
 void drawCircle(SDL_Renderer* renderer, int x, int y, int radius);
 
@@ -22,11 +22,11 @@ void drawArc(SDL_Renderer* renderer, int ox, int oy, int r, double radf, double 
 
 
 /*
-* »æÖÆÍÖÔ²
+* ç»˜åˆ¶æ¤­åœ†
 */
 void drawFillEllipse(SDL_Renderer* renderer, SDL_Color* color, int left, int top, int right, int bottom);
 
 /*
-* »æÖÆÔ²ÐÎ
+* ç»˜åˆ¶åœ†å½¢
 */
 void drawFillCircle(SDL_Renderer* renderer, int x, int y, int radius);

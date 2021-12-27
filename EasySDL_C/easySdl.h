@@ -2,17 +2,13 @@
 #define _EASYSDL_H_
 
 #include<stdbool.h>
-#include<SDL.h>
-#include<SDL_image.h>
-#include<SDL_ttf.h>
+#include<SDL2/SDL.h>
+#include<SDL2/SDL_image.h>
+#include<SDL2/SDL_ttf.h>
 
 #ifdef _WIN32
 #include<Windows.h>
 #include<tchar.h>
-#pragma comment(lib,"SDL2.lib")
-#pragma comment(lib,"SDL2main.lib")
-#pragma comment(lib,"SDL2_image.lib")
-#pragma comment(lib,"SDL2_ttf.lib")
 #endif // _WIN32
 
 // 颜色
